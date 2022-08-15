@@ -1,71 +1,24 @@
-import React, { Component } from 'react';
-import '../App.css';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import BookCard from './BookCard';
+import '../App.css';
 
-class ShowBookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: []
-    };
-  }
+const BookCard = (props) => {
+    const  book  = props.book;
 
-  componentDidMount() {
-    axios
-      .get('http://localhost:8082/api/books')
-      .then(res => {
-        this.setState({
-          books: res.data
-        })
-      })
-      .catch(err =>{
-        console.log('Error from ShowBookList');
-      })
-  };
-
-
-  render() {
-    const books = this.state.books;
-    console.log("PrintBook: " + books);
-    let bookList;
-
-    if(!books) {
-      bookList = "there is no book record!";
-    } else {
-      bookList = books.map((book, k) =>
-        <BookCard book={book} key={k} />
-      );
-    }
-
-    return (
-      <div className="ShowBookList">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <br />
-              <h2 className="display-4 text-center">Books List</h2>
+    return(
+        <div className="card-container">
+            <img src="https://commapress.co.uk/books/the-book-of-cairo/cairo-provisional-v3/image%2Fspan3" alt="" />
+            <div className="desc">
+                <h2>
+                    <Link to={`/show-book/${book._id}`}>
+                        { book.title }
+                    </Link>
+                </h2>
+                <h3>{book.author}</h3>
+                <p>{book.description}</p>
             </div>
-
-            <div className="col-md-11">
-              <Link to="/create-book" className="btn btn-outline-warning float-right">
-                + Add New Book
-              </Link>
-              <br />
-              <br />
-              <hr />
-            </div>
-
-          </div>
-
-          <div className="list">
-                {bookList}
-          </div>
         </div>
-      </div>
-    );
-  }
-}
+    )
+};
 
-export default ShowBookList;
+export default BookCard;
