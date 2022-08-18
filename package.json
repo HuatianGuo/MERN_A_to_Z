@@ -7,7 +7,7 @@
     "start": "node app.js",
     "app": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix mern_a_to_z_client && npm run build -- prefix mern_a_to_z_client"
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix mern_a_to_z_client && npm run build --prefix mern_a_to_z_client"
   
   },
   "repository": {
